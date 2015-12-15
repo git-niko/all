@@ -1,8 +1,8 @@
 //app.js
 
-var myApp = angular.module('myApp', ['ngDialog']);
+var myApp = angular.module('myApp', ['ngDialog','ui.bootstrap']);
 
-myApp.controller('myAppController',['$scope','ngDialog' , function($scope, ngDialog){
+myApp.controller('myAppController',['$scope','ngDialog' ,'$modal', function($scope, ngDialog, $modal){
 
 	console.log(ngDialog);
 	writeInHtml = function(){
@@ -19,7 +19,21 @@ myApp.controller('myAppController',['$scope','ngDialog' , function($scope, ngDia
 
 	$scope.openImage = function(){
 		console.log("Opening image ... ");
-
 		ngDialog.open({template:'all_popupImage.html'});
-	}
+	};
+
+	$scope.showForm = function(argument) {
+		
+		var modalInst= $modal.open({
+			templateUrl: 'modal-form.html',
+			controller: 'modalInstanceCtrl',
+			scope: $scope
+		});
+		
+	};
 }]);
+
+myApp.controller('modalInstanceCtrl', [function(){
+	console.log("ok loaded");
+}]);
+
